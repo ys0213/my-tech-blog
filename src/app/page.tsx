@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 
 type Post = {
@@ -18,7 +18,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const loader = useRef<HTMLDivElement | null>(null);
 
-  const fetchPosts = async (pageNum: number) => {
+  const fetchPosts = useCallback(async (pageNum: number) => {
     if (
       isLoading ||
       (totalPages !== null && pageNum > totalPages) ||
@@ -34,19 +34,25 @@ export default function Home() {
       return;
     }
 
-    const data = await res.json();
+    const data: { posts: Post[]; page: number; totalPages: number } = await res.json();
 
-    setPosts((prev) =>
-      pageNum === 1 ? data.posts : [...prev, ...data.posts]
-    );
+    setPosts((prev) => {
+      if (pageNum === 1) return data.posts;
+
+      const newPosts = data.posts.filter(
+        (post) => !prev.some((p) => p.id === post.id)
+      );
+
+      return [...prev, ...newPosts];
+    });
     setPage(data.page);
     setTotalPages(data.totalPages);
     setIsLoading(false);
-  };
+  }, [isLoading, page, totalPages]);
 
   useEffect(() => {
     fetchPosts(1);
-  }, []);
+  }, [fetchPosts]);
 
   useEffect(() => {
     if (!loader.current || totalPages === null) return;
@@ -68,7 +74,7 @@ export default function Home() {
     return () => {
       observer.unobserve(currentLoader);
     };
-  }, [page, totalPages, isLoading]);
+  }, [page, totalPages, isLoading, fetchPosts]);
 
   return (
     <main className="max-w-4xl mx-auto p-8">
