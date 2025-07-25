@@ -24,7 +24,7 @@ export default async function PostPage({ params }: any) {
         <meta property="og:type" content="article" />
         <meta
           property="og:url"
-          content={`https://yourdomain.com/posts/${post.id}`}
+          content={`https://my-tech-blog-beta.vercel.app/posts/${post.id}`}
         />
       </Head>
 
