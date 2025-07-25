@@ -10,8 +10,8 @@ type TagPageProps = {
 
 const POSTS_PER_PAGE = 5;
 
-export default async function TagPage({ params }: TagPageProps) {
-  const { tag, page } = await params;
+export default function TagPage({ params }: TagPageProps) {
+  const { tag, page } = params;
   const decodedTag = decodeURIComponent(tag);
 
   const allPosts = getSortedPostsData();
