@@ -7,13 +7,11 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.id }));
 }
 
-type PostPageProps = {
-  params: {
-    slug: string;
-  };
+type Props = {
+  params: { slug: string };
 };
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage({ params }: Props) {
   const post = await getPostData(params.slug);
 
   if (!post) {
