@@ -2,17 +2,17 @@ import Head from 'next/head';
 import { getPostData, getSortedPostsData } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const posts = getSortedPostsData();
   return posts.map((post) => ({ slug: post.id }));
 }
 
-type Props = {
+type PageProps = {
   params: { slug: string };
 };
 
-export default async function PostPage({ params }: Props) {
-  const post = await getPostData(params.slug);
+export default async function PostPage({ params }: PageProps) {
+  const post = await getPostData(params?.slug);
 
   if (!post) {
     notFound();
