@@ -4,8 +4,7 @@ import { getSortedPostsData } from '@/lib/posts';
 const POSTS_PER_PAGE = 5;
 
 export async function GET(req: NextRequest, { params }: { params: { page: string } }) {
-  const paramsData = await params;
-  const page = parseInt(paramsData.page, 10) || 1;
+  const page = parseInt(params.page, 10) || 1;
   const allPosts = getSortedPostsData();
 
   const startIdx = (page - 1) * POSTS_PER_PAGE;
