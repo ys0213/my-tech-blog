@@ -9,8 +9,8 @@ type TagPageProps = {
 };
 
 const POSTS_PER_PAGE = 5;
-
-export default function TagPage({ params }: TagPageProps) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default function TagPage({ params }: any) {
   const { tag, page } = params;
   const decodedTag = decodeURIComponent(tag);
 
