@@ -6,12 +6,14 @@ export async function generateStaticParams() {
   const posts = getSortedPostsData();
   return posts.map((post) => ({ slug: post.id }));
 }
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+
+type PostPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostData(params.slug);
 
   if (!post) {
