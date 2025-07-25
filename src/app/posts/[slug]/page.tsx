@@ -12,7 +12,7 @@ type PageProps = {
 };
 
 export default async function PostPage({ params }: PageProps) {
-  const post = await getPostData(params?.slug);
+  const post = await getPostData(params.slug);
 
   if (!post) {
     notFound();
