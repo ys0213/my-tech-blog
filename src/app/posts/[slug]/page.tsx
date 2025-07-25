@@ -6,8 +6,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getSortedPostsData();
   return posts.map((post) => ({ slug: post.id }));
 }
-
-export default async function PostPage({ params }: { params: { slug: string } }) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default async function PostPage({ params }: any) {
   const post = await getPostData(params.slug);
 
   if (!post) {
