@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { getPostData, getSortedPostsData } from '@/lib/posts';
 import { notFound } from 'next/navigation';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const posts = getSortedPostsData();
   return posts.map((post) => ({ slug: post.id }));
 }
