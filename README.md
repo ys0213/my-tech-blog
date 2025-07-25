@@ -30,8 +30,3 @@ Clone this repository and run the development server:
 ```bash
 npm install
 npm run dev
-
-Visit http://localhost:3000 to view the blog locally.
-
-Live Demo
-Explore the live site here: https://my-tech-blog-beta.vercel.app
