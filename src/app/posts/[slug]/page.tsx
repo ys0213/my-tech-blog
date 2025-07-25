@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 }
 
 export default async function PostPage({ params }: Params) {
-  const resolvedParams = await params;
+  const resolvedParams = params;
   const post = await getPostData(resolvedParams.slug);
 
   if (!post) {
